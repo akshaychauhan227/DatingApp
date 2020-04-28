@@ -1,4 +1,4 @@
-namespace DatingApp.API.Controllers
+namespace DatingApp.API.Dtos
 {
     public class UserForLoginDto
     {

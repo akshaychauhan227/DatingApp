@@ -2,6 +2,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
+using DatingApp.API.Dtos;
 using DatingApp.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
@@ -10,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace DatingApp.API.Controllers 
-{// all api's are here 
+{
     [Route("api/[Controller]")]
     [ApiController]
     
@@ -66,14 +67,8 @@ namespace DatingApp.API.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return Ok( new { token = tokenHandler.WriteToken(token)});
-
-            
             
         }
-        
-        
-
-       
         
     }
 }
