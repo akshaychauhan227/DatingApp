@@ -9,9 +9,7 @@ import {JwtHelperService} from '@auth0/angular-jwt'
 })
 
 export class AppComponent implements OnInit {
-  ifloggedIn:boolean = true;
   jwtHelper = new JwtHelperService();
-
   constructor(private authService: AuthService ) {
   }
   ngOnInit()
@@ -20,13 +18,8 @@ export class AppComponent implements OnInit {
     if (token) {
       this.authService.decodedToken= this.jwtHelper.decodeToken(token);
     }
-    console.log("its is" + this.ifloggedIn);
   }
 
-removeRegister(a)
-{
-  this.ifloggedIn=!a;
-}
  
   
 

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using DatingApp.API.Controllers.Helpers;
 using AutoMapper;
 
 namespace DatingApp.API
@@ -28,10 +29,12 @@ namespace DatingApp.API
         // refer the connectionstring here!!!!!!
         public void ConfigureServices(IServiceCollection services)
         {   
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            services.AddDbContext<DataContext>(x=>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));//this part is imp!
-            services.AddControllers().AddNewtonsoftJson(opt =>{opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;});
+            services.AddDbContext<DataContext>(x=>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddControllers()
+            .AddNewtonsoftJson(opt =>{opt.SerializerSettings
+            .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;});
             services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IAuthrepository, Authrepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
@@ -74,6 +77,7 @@ namespace DatingApp.API
             //app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());//sequence is imp
             app.UseRouting();
+            app.UseAuthentication(); 
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

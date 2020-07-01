@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 
 export class NavComponent implements OnInit{
   RegisterForm : any;
-  @Output() DontShowRegisterForm = new EventEmitter<boolean>();
   model: any = {};
   constructor(public authService: AuthService, private alertify: AlertifyService, private router : Router) { }
   ngOnInit() {
@@ -25,18 +24,15 @@ export class NavComponent implements OnInit{
       this.alertify.success('Logged in successfully');
     }, error => {
       this.alertify.error('Failed to login');
-    },()=> this.router.navigate(['/members']
-    ));
+    },
+    ()=> this.router.navigate(['/members']));
 
-    
   }
 
   loggedIn()
   {
     this.RegisterForm=this.authService.loggedin()
-    this.DontShowRegisterForm.emit(this.RegisterForm);
-      console.log("its is" + this.RegisterForm);
-      return (this.RegisterForm);
+    return (this.RegisterForm);
   }
 
   logout()

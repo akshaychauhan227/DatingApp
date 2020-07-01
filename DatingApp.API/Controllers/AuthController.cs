@@ -14,19 +14,17 @@ namespace DatingApp.API.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    
+
     public class AuthController : ControllerBase
     {
         private readonly IAuthrepository _repo;
         private readonly IConfiguration _config;
-
         public AuthController(IAuthrepository repo, IConfiguration config)
         {
             _repo = repo;
             _config = config;
         }
 
-        
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
@@ -39,7 +37,6 @@ namespace DatingApp.API.Controllers
             };
             var createdUser = await _repo.Register(UserToCreate, userForRegisterDto.Password);
             return StatusCode(201);
- 
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto )
@@ -67,8 +64,6 @@ namespace DatingApp.API.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return Ok( new { token = tokenHandler.WriteToken(token)});
-            
         }
-        
     }
 }

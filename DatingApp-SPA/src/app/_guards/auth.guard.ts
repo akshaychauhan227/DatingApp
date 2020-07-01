@@ -20,7 +20,6 @@ constructor(
       if(this.authService.loggedin()){
         return true;
       }
-      
       this.alertify.error("You Shall Not Pass!!");
       this.router.navigate(['/home']);
       return false;

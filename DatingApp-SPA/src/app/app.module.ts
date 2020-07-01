@@ -1,20 +1,47 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtModule } from '@auth0/angular-jwt';
+import { NgxGalleryModule } from 'ngx-gallery';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule} from '@angular/common/http';
+import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import { TabsModule} from 'ngx-bootstrap/tabs'
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
-import { MemberListComponent } from './member-list/Member-List/Member-List.component';
-import { ListsComponent } from './lists/lists/lists.component';
-import { MessagesComponent } from './messages/messages/messages.component';
+import { MemberListComponent } from './members/Member-List/Member-List.component';
+import { ListsComponent } from './lists/Lists-component/lists.component';
+import { MessagesComponent } from './messages/Messages-component/messages.component';
+import {MemberCardComponent } from './members/member-card/member-card.component';
+import { MemberDetailsComponent } from './members/member-details/member-details.component';
+import { AuthService } from './_services/auth.service';
+import { AlertifyService } from './_services/alertify.service';
+import { AuthGuard } from './_guards/auth.guard';
+import { UserService } from './_services/user.service';
+import { MemberDetailResolver } from './_resolvers/member-details.resolver';
+import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { PrevetUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+
+
+ export function tokenGetter(){
+    return localStorage.getItem('token');
+ }
+
+ export class CustomHammerConfig extends HammerGestureConfig  {
+   overrides = {
+       pinch: { enable: false },
+       rotate: { enable: false }
+   };
+}
 
 @NgModule({
    declarations: [
@@ -24,18 +51,42 @@ import { MessagesComponent } from './messages/messages/messages.component';
       RegisterComponent,
       MemberListComponent,
       ListsComponent,
-      MessagesComponent
+      MessagesComponent,
+      MemberCardComponent,
+      MemberDetailsComponent,
+      MemberEditComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
+      BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
-      BrowserAnimationsModule
+      TabsModule.forRoot(),
+      NgxGalleryModule,
+      JwtModule.forRoot({
+         config : {
+            tokenGetter : tokenGetter,
+            whitelistedDomains : ['localhost:5000'],
+            blacklistedRoutes : ['localhost:5000/api/auth']
+         }
+      })
+      
    ],
-   providers: [ErrorInterceptorProvider],
+   providers: [
+      ErrorInterceptorProvider,
+      AuthService,
+      AlertifyService,
+      AuthGuard,
+      PrevetUnsavedChanges,
+      UserService,
+      MemberDetailResolver,
+      MemberListResolver,
+      { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
+      MemberEditResolver
+   ],
    bootstrap: [
       AppComponent
    ]
