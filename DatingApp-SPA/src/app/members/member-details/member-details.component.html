@@ -1,12 +1,11 @@
 <div class="container mt-4">
 <div class="row mr-5">
-<h3 style="font-family:sans-serif;padding-left:50px" >{{user.knownAs}}'s Profile</h3>
+<h3 style="font-family:sans-serif;padding-left:50px">{{user.knownAs}}'s Profile</h3>
 </div>
 <div class="row">
-    
     <div class="col-sm-4">
         <div class="card">
-            <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt = "{{user.knownAs}}">
+            <img class="card-img-top img-thumbnail" src="{{user.photoUrl ||'../../../../../assets/user.png'}}" alt = "{{user.knownAs}}">
             <div class="card-body">
                 <div>
                     <strong>Location:</strong>
@@ -48,7 +47,6 @@
                 </tab>
                 <tab heading="Photos">
                     <ngx-gallery [options] ="galleryOptions" [images]= "galleryImages"></ngx-gallery>
-                    
                 </tab>
                 <tab heading="Messages">
                     <h4>Messages will go here</h4>
