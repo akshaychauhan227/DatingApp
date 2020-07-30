@@ -1,7 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
-using System.Reflection.Metadata;
-using System.Security.Cryptography;
-using System;
 using System.Threading.Tasks;
 using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +10,6 @@ namespace DatingApp.API.Data
         public Authrepository(DataContext context)
         {
             _context = context;
-
         }
         public async Task<User> Login(string username, string password)
         {
@@ -36,7 +31,6 @@ namespace DatingApp.API.Data
                     if (computedHash[i] != passwordHash[i]) return false;
                 }
             }
-
             return true;
         }
 

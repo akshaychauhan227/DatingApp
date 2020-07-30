@@ -1,7 +1,5 @@
-using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Linq;
-using DatingApp.API.Data;
 using DatingApp.API.Models;
 using Newtonsoft.Json;
 namespace DatingApp.API.Data

@@ -4,7 +4,7 @@ using AutoMapper;
 using DatingApp.API.Dtos;
 using DatingApp.API.Models;
 
-namespace DatingApp.API.Controllers.Helpers
+namespace DatingApp.API.Helpers
 {
     public class AutomapperProfiles : Profile
     {   
@@ -24,6 +24,7 @@ namespace DatingApp.API.Controllers.Helpers
 
             CreateMap<PhotoForCreationDto,Photo>();
             CreateMap<UserForRegisterDto,User>();
+            
         }
     }
 }

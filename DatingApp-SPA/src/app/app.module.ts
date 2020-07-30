@@ -9,11 +9,14 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeagoModule, TimeagoPipe} from 'ngx-timeago';
 import { TimeAgoPipe } from 'time-ago-pipe'
+import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import { TabsModule} from 'ngx-bootstrap/tabs'
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
-import { TabsModule} from 'ngx-bootstrap/tabs'
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -34,9 +37,6 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PrevetUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
-
 
  export function tokenGetter(){
     return localStorage.getItem('token');
@@ -71,6 +71,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
+      ButtonsModule,
       ReactiveFormsModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
@@ -78,6 +79,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       TabsModule.forRoot(),
       BsDatepickerModule.forRoot(),
       TimeagoModule.forRoot(),
+      PaginationModule.forRoot(),
       NgxGalleryModule,
       FileUploadModule,
       JwtModule.forRoot({
