@@ -40,8 +40,9 @@ export class MemberEditComponent implements OnInit {
     this.route.data.subscribe(
       data=>{
         this.user = data['editResolver'];
-      })
-      this.authService.currentPhotoUrl.subscribe(data => this.photoUrl= data)
+            })
+      
+    this.authService.currentPhotoUrl.subscribe(data => this.photoUrl= data)
   }
 
 

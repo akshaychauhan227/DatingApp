@@ -16,6 +16,7 @@ namespace DatingApp.API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+
     public class UsersController : ControllerBase
     {
         private readonly IDatingRepository _repo;
@@ -51,7 +52,6 @@ namespace DatingApp.API.Controllers
             var user = await _repo.GetUser(id);
             var userToReturn = _mapper.Map<UserForDetailedDto>(user);
             return Ok(userToReturn);
-            
         }
 
         [HttpPut("{id}")]
@@ -66,6 +66,41 @@ namespace DatingApp.API.Controllers
                 return NoContent();
             }
             throw new System.Exception($"Updating user {id} failed on save");
+        }
+
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> LikeUser(int id, int recipientId)
+        {
+            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var like = await _repo.GetLike(id,recipientId);
+            if(like!=null)
+            {
+                return BadRequest("You already liked this user");
+            }
+
+            var rec = await _repo.GetUser(recipientId);
+            if(rec==null)
+            {
+                return BadRequest("User not found");
+            }
+
+            like = new Like
+            {
+                LikerId = id,
+                LikeeId = recipientId
+            };
+
+            _repo.Add<Like>(like);
+            if(await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed to like user"); 
         }
     }
 }

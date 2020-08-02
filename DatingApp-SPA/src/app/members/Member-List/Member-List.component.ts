@@ -45,6 +45,7 @@ userParams : any = {}
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
     this.userParams.orderBy = 'lastActive';
+    this.loadUsers();
   }
 
   pageChanged(event: any):void
@@ -55,7 +56,6 @@ userParams : any = {}
 
   loadUsers()
   {
-    console.log(this.userParams.orderBy);
     this.userService.getUsers(this.paginationData.currentPage,this.paginationData.itemsPerPage, this.userParams)
     .subscribe(
       (res:PaginatedResult<User[]>)=>{
