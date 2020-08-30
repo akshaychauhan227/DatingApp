@@ -27,9 +27,25 @@ namespace DatingApp.API
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // refer the connectionstring here!!!!!!
+
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {   
+            services.AddDbContext<DataContext>(x=>x.UseSqlServer(Configuration
+            .GetConnectionString("DefaultConnection")));
+
+            ConfigureServices(services);
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {   
+            services.AddDbContext<DataContext>(x=>x.UseSqlServer(Configuration
+            .GetConnectionString("DefaultConnection")));
+
+            ConfigureServices(services);
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {   
-            services.AddDbContext<DataContext>(x=>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers()
                     .AddNewtonsoftJson(opt =>{opt.SerializerSettings
                     .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;});
@@ -79,11 +95,19 @@ namespace DatingApp.API
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());//sequence is imp
             app.UseRouting();
             app.UseAuthentication(); 
+
             app.UseAuthorization();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index","Fallback");
             });
         }
     }
 }
+
+
+

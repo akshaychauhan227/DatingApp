@@ -58,7 +58,7 @@ getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginatedRe
 
 getUser(id): Observable<User>
 {
-  return this.http.get<User>(this.baseUrl+ 'users/'+id);
+  return this.http.get<User>(this.baseUrl+ 'users/'+id); 
 }
 
 updateUser(id: number, user: User)

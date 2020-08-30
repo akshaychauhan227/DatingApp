@@ -38,6 +38,7 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PrevetUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
+import { CustomTimeAgoPipe } from './_services/CustomTimeAgo.pipe';
 
  export function tokenGetter(){
     return localStorage.getItem('token');
@@ -63,7 +64,8 @@ import { ListsResolver } from './_resolvers/lists.resolver';
       MemberDetailsComponent,
       MemberEditComponent,
       PhotoEditorComponent,
-      TimeAgoPipe
+      TimeAgoPipe,
+      CustomTimeAgoPipe
    
    ],
    imports: [

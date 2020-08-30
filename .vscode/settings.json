@@ -2,5 +2,9 @@
     "cSpell.words": [
         "Dtos",
         "alertify"
+    ],
+    "cSpell.ignoreWords": [
+        "akshay",
+        "sqlexpress"
     ]
 }

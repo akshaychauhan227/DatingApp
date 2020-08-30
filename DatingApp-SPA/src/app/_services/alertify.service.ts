@@ -5,13 +5,14 @@ import { stringify } from 'querystring';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AlertifyService {
 
 constructor() { }
 
-confirm(messgae: string, okCallback:()=>any)
+confirm(message: string, okCallback:()=>any)
 {
-  alertify.confirm(messgae,(e: any)=> {
+  alertify.confirm(message,(e: any)=> {
     if (e) {
       okCallback();
     } else{}
@@ -30,9 +31,9 @@ confirm(messgae: string, okCallback:()=>any)
     alertify.warning(message);
   }
 
-  message(messsage: string)
+  message(message: string)
   {
-    alertify.message(messsage);
+    alertify.message(message);
   }
 
 }

@@ -6,6 +6,7 @@ import { AlertifyService } from '../_services/alertify.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthGuard implements CanActivate {
 constructor(
   private authService: AuthService,
@@ -20,9 +21,8 @@ constructor(
       if(this.authService.loggedin()){
         return true;
       }
-      this.alertify.error("You Shall Not Pass!!");
+      this.alertify.error("I am auth guard. I wil not let you pass without authentication!!");
       this.router.navigate(['/home']);
       return false;
   }
-  
 }
