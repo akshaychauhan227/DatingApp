@@ -2,7 +2,7 @@ using System;
 
 namespace DatingApp.API.Dtos
 {
-    public class UserForListDto
+    public class UserForListDto   //from db to UI thats y sending it with ID
     {
         public int Id { get; set; }
         public string Username { get; set; }

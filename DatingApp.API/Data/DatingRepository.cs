@@ -52,19 +52,25 @@ namespace DatingApp.API.Data
             .OrderByDescending(u=>u.LastActive).AsQueryable();
 
             users = users.Where(u=>u.Id!=userParams.UserId);
-            users = users.Where(u=>u.Gender==userParams.Gender);
+           
 
             if (userParams.Likers)
             {
+                
                 var userLikers = await GetUserLikes(userParams.UserId, userParams.Likers);
                 users = users.Where(u=>userLikers.Contains(u.Id));
+                return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
             }
 
             if (userParams.Likees)
             {
+                
                 var userLikees = await GetUserLikes(userParams.UserId, userParams.Likers);
                 users = users.Where(u=>userLikees.Contains(u.Id));
+                return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
             }
+
+            users = users.Where(u=>u.Gender==userParams.Gender);
 
             if(userParams.MinAge !=18 || userParams.MaxAge !=99){
                 var minDob = DateTime.Today.AddYears(-userParams.MaxAge-1);
@@ -100,6 +106,7 @@ namespace DatingApp.API.Data
                         .Include(u=>u.Likers)
                         .Include(u=>u.Likees)
                         .FirstOrDefaultAsync(u=>u.Id==id);
+            //System.Console.WriteLine(user.Id+"\t"+user.KnownAs);
             if(likers)
             {
                 return user.Likers.Where(u=>u.LikeeId==id).Select(i=>i.LikerId);
@@ -108,6 +115,8 @@ namespace DatingApp.API.Data
             {
                 return user.Likees.Where(u=>u.LikerId==id).Select(i=>i.LikeeId);
             }
+
+            
             
         }
 

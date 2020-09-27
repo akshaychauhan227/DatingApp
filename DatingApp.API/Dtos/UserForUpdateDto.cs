@@ -1,6 +1,6 @@
 namespace DatingApp.API.Dtos
 {
-    public class UserForUpdateDto
+    public class UserForUpdateDto   //from UI to DB...thats y ID is not here it Comes with URL
     {
         public string Introduction { get; set; }
         public string LookingFor { get; set; }

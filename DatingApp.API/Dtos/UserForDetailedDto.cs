@@ -4,7 +4,7 @@ using DatingApp.API.Models;
 
 namespace DatingApp.API.Dtos
 {
-    public class UserForDetailedDto
+    public class UserForDetailedDto            //from db to UI thats y sending it with ID
     {
         public int Id { get; set; }
         public string Username { get; set; }

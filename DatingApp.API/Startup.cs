@@ -45,7 +45,7 @@ namespace DatingApp.API
         }
 
         public void ConfigureServices(IServiceCollection services)
-        {   
+        {   //services.AddSingleton<IConfiguration>(Configuration);
             services.AddControllers()
                     .AddNewtonsoftJson(opt =>{opt.SerializerSettings
                     .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;});
@@ -105,6 +105,7 @@ namespace DatingApp.API
                 endpoints.MapControllers();
                 endpoints.MapFallbackToController("Index","Fallback");
             });
+            //services.AddSingleton<IConfiguration>(Configuration);
         }
     }
 }

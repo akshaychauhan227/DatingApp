@@ -14,7 +14,7 @@ using AutoMapper;
 
 namespace DatingApp.API.Controllers 
 {
-    [Route("api/[Controller]")]
+    [Route("api/[Controller]")]     
     [ApiController]
 
     public class AuthController : ControllerBase

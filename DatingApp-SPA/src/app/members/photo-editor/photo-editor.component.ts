@@ -38,7 +38,8 @@ export class PhotoEditorComponent implements OnInit {
     this.HasBaseDropZoneOver = e;
   }
 
-  initializeUploader(){
+  initializeUploader()
+  {
     this.uploader = new FileUploader({
       url:this.baseURL + 'users/' + this.authService.decodedToken.nameid+ '/photos',
       authToken:'Bearer ' + localStorage.getItem('token'),
@@ -50,6 +51,7 @@ export class PhotoEditorComponent implements OnInit {
     }) ;
 
     this.uploader.onAfterAddingFile = (file) =>{file.withCredentials = false;}
+    //------------------------------------------------------------------------------
 
     this.uploader.onSuccessItem = (item, response, status, headers)=>{
       if(response)
@@ -63,6 +65,7 @@ export class PhotoEditorComponent implements OnInit {
           isMain : res.isMain
         };
         this.photos.push(photo);
+
         if(photo.isMain){
           this.authService.changeMemberPhoto(photo.url);
           this.authService.currentUser.photoUrl = photo.url;

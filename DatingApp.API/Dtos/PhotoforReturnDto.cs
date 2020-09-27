@@ -2,7 +2,7 @@ using System;
 
 namespace DatingApp.API.Dtos
 {
-    public interface PhotoforReturnDto
+    public interface PhotoforReturnDto       //from db to UI thats y sending it with ID
     {
         public int Id { get; set; }
         public string Url { get; set; }

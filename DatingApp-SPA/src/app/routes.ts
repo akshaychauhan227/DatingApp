@@ -16,7 +16,7 @@ export const appRoutes: Routes =
 [   {path: 'home', component:HomeComponent},
     {
         path:'',
-        runGuardsAndResolvers: 'always',
+        //runGuardsAndResolvers: '',
         canActivate : [AuthGuard],
         children : [
             {path: 'members', component: MemberListComponent , resolve:{usersResolver:MemberListResolver}},
@@ -24,7 +24,8 @@ export const appRoutes: Routes =
             {path :'member/edit', component: MemberEditComponent, resolve:{editResolver : MemberEditResolver}, canDeactivate:[PrevetUnsavedChanges]},
             {path: 'messages', component: MessagesComponent},
             {path: 'lists', component:ListsComponent, resolve:{listsResolver : ListsResolver}},
+            
         ]
     },
-    {path: '**', redirectTo :'home', pathMatch: 'full' }
+    {path: '**', redirectTo :'home', pathMatch: 'full'}
 ];

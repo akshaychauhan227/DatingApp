@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 namespace DatingApp.API.Dtos
 {
-    public class UserForRegisterDto
+    public class UserForRegisterDto             //from UI to DB...thats y ID is not here..now it will get created.
     {
         [Required]
         public string Username { get; set; }

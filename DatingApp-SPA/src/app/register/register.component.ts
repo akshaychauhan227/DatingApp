@@ -31,27 +31,36 @@ export class RegisterComponent implements OnInit {
   }
 
   CreateRegisterForm(){
-    this.registerForm = this.fb.group({
-      gender:['',Validators.required],
-      username : ['',Validators.required],
-      knownAs:['',Validators.required],
-      dateOfBirth:['',Validators.required],
-      city:['',Validators.required],
-      country :['',Validators.required],
-      password : ['',[Validators.required,Validators.minLength(4),Validators.maxLength(8)]],
-      confirmPassword : ['',Validators.required]
-    },{validator: this.passwordMatchValidator})
+    this.registerForm = this.fb.group(
+      {
+        gender: ['',Validators.required],
+        username : ['',Validators.required],
+        knownAs:['',Validators.required],
+        dateOfBirth:['',Validators.required],
+        city:['',Validators.required],
+        country :['',Validators.required],
+        password : ['',[Validators.required,Validators.minLength(4),Validators.maxLength(8)]],
+        confirmPassword : ['',Validators.required]
+      },
+      {
+        validator: this.passwordMatchValidator
+      }
+
+    )
   }
 
-  passwordMatchValidator(g:FormGroup){
-  return g.get('password').value === g.get('confirmPassword').value ? null:{'mismatch':true};
+  passwordMatchValidator(g:FormGroup)
+  {
+    return g.get('password').value === g.get('confirmPassword').value ? null:{'mismatch':true};
   }
 
 
   register()
   {
-    if(this.registerForm.valid){
+    if(this.registerForm.valid)
+    {
       this.user = Object.assign({},this.registerForm.value)
+
       this.authService.register(this.user).subscribe(
         ()=>{this.alertify.success("Registration Successful")},
         error=>{this.alertify.error(error)},
@@ -61,7 +70,6 @@ export class RegisterComponent implements OnInit {
         )
       )
     }
-   
     console.log(this.registerForm.value);
   }
 

@@ -8,21 +8,10 @@
           <input class="mr-3" type="radio" value="male" formControlName="gender">Male
         </label>
         <label class="radio-inline ml-3">
-          <input class="mr-3" type="radio" value="female" formControlName="gender">Female
+          <input class="mr-3" type="radio" value="female" formControlName="">Female
         </label>
   </div>
-
-  
-  <div class="form-group">
-        <input type="text" 
-        [ngClass]="{'is-invalid': registerForm.get('username').errors
-                    && registerForm.get('username').touched}"
-        class="form-control" 
-        formControlName="username" 
-        placeholder="Username">
-        <div class="invalid-feedback">Please choose a username</div>
-  </div>
-  
+  gender
   <div class="form-group">
         <input [ngClass]="{'is-invalid': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}" class="form-control"
           placeholder="Known as" formControlName="knownAs">
@@ -50,6 +39,15 @@
     <div class="invalid-feedback" *ngIf="registerForm.get('country').touched && registerForm.get('country').hasError('required')">Country is required</div>
   </div>
 
+  <div class="form-group">
+    <input type="text" 
+    [ngClass]="{'is-invalid': registerForm.get('username').errors
+                && registerForm.get('username').touched}"
+    class="form-control" 
+    formControlName="username" 
+    placeholder="Username">
+    <div class="invalid-feedback">Please choose a username</div>
+  </div>
 
   <div class="form-group">
         <input type="password" 
@@ -96,9 +94,6 @@
           && registerForm.get('confirmPassword').touched">
           Password must match.</div>
   </div>
-
-
-
 
   <div class="form-group text-center">
     <button class="btn btn-success mr-2" type="submit">Register</button>

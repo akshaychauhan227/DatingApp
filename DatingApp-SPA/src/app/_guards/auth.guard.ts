@@ -18,10 +18,10 @@ constructor(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
 
-      if(this.authService.loggedin()){
+      if(this.authService.loggedin() ){
         return true;
       }
-      this.alertify.error("I am auth guard. I wil not let you pass without authentication!!");
+      this.alertify.error("Not Authenticated");
       this.router.navigate(['/home']);
       return false;
   }

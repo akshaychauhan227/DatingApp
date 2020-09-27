@@ -63,7 +63,7 @@ getUser(id): Observable<User>
 
 updateUser(id: number, user: User)
 {
-   return this.http.put(this.baseUrl+ 'users/'+id, user);
+   return this.http.put(this.baseUrl+ 'users/'+id, user);//http://localhost:5000/api/users/1
 }
 
 setMainPhoto(userId: number, id:number)
